@@ -24,6 +24,14 @@
     section {
       margin-bottom: 2em;
     }
+    pre {
+      background-color: #f4f4f4;
+      padding: 1em;
+      border-radius: 5px;
+      white-space: pre-wrap; /* 長い行を折り返し */
+      word-wrap: break-word;
+      text-align: center; /* 中央揃え */
+    }
     @media (max-width: 600px) {
       body {
         font-size: 1em;
@@ -39,7 +47,11 @@
 
   <section>
     <h2>今週のやったこと</h2>
-    <p></p>
+    <p>
+    </p>
+    <pre>
+      puts("hello");
+    </pre>
     <ul>
       <li></li>
       <li></li>
