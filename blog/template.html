@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>シンプル多機能ブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg: #fff;
+      --text: #222;
+      --border: #ccc;
+      --link: #0077cc;
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #eee;
+      --border: #444;
+      --link: #66b0ff;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: 800px;
+      margin: auto;
+      padding: 1em;
+    }
+
+    h1, h2 {
+      margin-top: 2em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    a { color: var(--link); }
+
+    #toc {
+      border: 1px solid var(--border);
+      padding: 1em;
+      margin-bottom: 2em;
+      background: rgba(0,0,0,0.03);
+    }
+
+    .collapsible {
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1em;
+    }
+    .content {
+      display: none;
+      margin-top: 0.5em;
+    }
+
+    #toggle-theme {
+      float: right;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Blog <button id="toggle-theme">🌓 テーマ切替</button></h1>
+
+  <div id="toc">
+    <strong>目次</strong>
+    <ul id="toc-list"></ul>
+  </div>
+
+  <section>
+    <h2 class="collapsible">今週のやったこと</h2>
+    <div class="content">
+      <ul>
+        <li>数学の復習</li>
+        <li>物理問題演習</li>
+        <li>TOEIC模試</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="collapsible">まとめ</h2>
+    <div class="content">
+      <p>全体として手応えはあったが、時間管理が課題。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="collapsible">次に向けて</h2>
+    <div class="content">
+      <p>来週はC言語の基礎文法を習得する。</p>
+    </div>
+  </section>
+
+  <script>
+    // 目次生成
+    const tocList = document.getElementById("toc-list");
+    document.querySelectorAll("h2").forEach((h2, i) => {
+      const id = "section" + i;
+      h2.id = id;
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="#${id}">${h2.textContent}</a>`;
+      tocList.appendChild(li);
+    });
+
+    // アコーディオン機能
+    document.querySelectorAll(".collapsible").forEach(h => {
+      h.addEventListener("click", () => {
+        const next = h.nextElementSibling;
+        next.style.display = next.style.display === "block" ? "none" : "block";
+      });
+    });
+
+    // テーマ切り替え
+    const btn = document.getElementById("toggle-theme");
+    btn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+  </script>
+</body>
+</html>
